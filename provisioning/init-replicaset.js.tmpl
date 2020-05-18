@@ -1,0 +1,12 @@
+
+var cfg = { _id: "${replicaSetName}",
+    members: [
+        %{ for index, addr in ip_addrs ~}
+        { "_id": ${index}, host: "${addr}", "priority": ${index == 0 ? 1 : 0}},
+        %{ endfor }
+    ]
+};
+
+var error = rs.initiate(cfg);
+printjson(error);
+
