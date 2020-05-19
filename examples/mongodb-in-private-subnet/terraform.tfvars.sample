@@ -1,0 +1,15 @@
+# To specify/override the input variable values
+region = ""
+vpc_id = ""
+subnet_id = ""
+data_volumes = [
+  {
+    ebs_volume_id     = ""
+    availability_zone = ""
+  },
+  {
+     ebs_volume_id     = ""
+     availability_zone = ""
+  }
+]
+bastion_host = ""

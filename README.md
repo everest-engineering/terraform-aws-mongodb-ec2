@@ -1,9 +1,7 @@
-# Terraform module to provision MongoDB using AWS-EC2
-
-This module is part of a project to simplify the provisioning of MongoDB on AWS cloud using Terraform. 
-You may also wish to consider [one of the other approaches](https://github.com/everest-engineering/terraform-mongodb-provisioning).
-
 # Terraform MongoDB provisioner using AWS EC2
+
+> This module is part of a project to simplify the provisioning of MongoDB on AWS cloud using Terraform. 
+You may also wish to consider [one of the other approaches](https://github.com/everest-engineering/terraform-mongodb-provisioning).
 
 This module provision MongoDB server on AWS EC2 instance using Ansible provisioner.
 
@@ -13,7 +11,7 @@ This module uses [undergreen.mongodb](https://galaxy.ansible.com/undergreen/mong
 So, you can use any of the [platforms supported by **undergreen.mongodb**](https://github.com/UnderGreen/ansible-role-mongodb/blob/master/README.md) role while selecting the AMI ID.
 
 ### Pros
-1. Simplified MongoDB provisioner supporting Replication
+1. Simplified MongoDB provisioner supporting Replication.
 2. EC2 instances can be provisioned with newer MongoDB versions and attach to existing EBS data volumes if versions are compatible.
 3. MongoDB can be provisioned in either public subnet or in private subnet using Bastion host.
 
@@ -75,7 +73,7 @@ module "mongodb" {
   public_key        = file("~/.ssh/id_rsa.pub")
   tags = {
       Name        = "MongoDB Server"
-      Environment = "terraform-mong-testing"
+      Environment = "terraform-mongo-testing"
   }
 }
 
@@ -120,7 +118,7 @@ module "mongodb" {
   bastion_host      = "BASTION_HOST_IP_HERE"
   tags = {
         Name        = "MongoDB Server"
-        Environment = "terraform-mong-testing"
+        Environment = "terraform-mongo-testing"
   }
 }
 ```

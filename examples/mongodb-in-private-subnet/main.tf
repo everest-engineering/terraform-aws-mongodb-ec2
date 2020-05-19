@@ -1,5 +1,5 @@
 provider "aws" {
-  region  = "us-east-1"
+  region  = var.region
   profile = "terraform-provisioner-ansible"
 }
 
@@ -20,14 +20,13 @@ module "mongodb" {
   bastion_host    = var.bastion_host
   tags = {
     Name        = "MongoDB Server"
-    Environment = "terraform-mong-testing"
+    Environment = "terraform-mongo-testing"
   }
 }
 
-variable "availability_zone" {
+variable "region" {
   type        = string
-  description = "Availability zone in which MongoDB should be provisioned"
-  default     = "us-east-1a"
+  description = "AWS Region"
 }
 
 variable "vpc_id" {
@@ -46,7 +45,6 @@ variable "data_volumes" {
     availability_zone = string
   }))
   description = "List of EBS volumes"
-  default     = []
 }
 
 variable "bastion_host" {

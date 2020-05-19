@@ -1,5 +1,5 @@
 provider "aws" {
-  region  = "us-east-1"
+  region  = var.region
   profile = "terraform-provisioner-ansible"
 }
 
@@ -9,7 +9,7 @@ data "aws_vpc" "default" {
 
 data "aws_subnet" "subnet" {
   vpc_id            = data.aws_vpc.default.id
-  availability_zone = var.availability_zone
+  availability_zone = var.data_volumes[0].availability_zone
 }
 
 module "mongodb" {
@@ -28,9 +28,13 @@ module "mongodb" {
   public_key      = file("~/.ssh/id_rsa.pub")
   tags = {
     Name        = "MongoDB Server"
-    Environment = "terraform-mong-testing"
+    Environment = "terraform-mongo-testing"
   }
+}
 
+variable "region" {
+  type        = string
+  description = "AWS Region"
 }
 
 variable "data_volumes" {
@@ -39,11 +43,11 @@ variable "data_volumes" {
     availability_zone = string
   }))
   description = "List of EBS volumes"
-  default     = []
 }
+
 variable "availability_zone" {
   type    = string
-  default = "us-east-1a"
+  description = "Availability zone"
 }
 
 output "mongo_server_ip_address" {

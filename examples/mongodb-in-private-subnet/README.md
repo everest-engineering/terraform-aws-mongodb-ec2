@@ -22,6 +22,8 @@ terraform apply
 3. Provision MongoDB:
 Configure the existing/created `ebs_volume_id`(s) and a`vailability_zone`(s) as `data_volumes` variable in `mongodb-in-private-subnet/main.tf`.
 
+> Instead of changing the variable values in `main.tf` you can rename `terraform.tfvars.sample` to `terraform.tfvars` and provide input values.
+
 ```hcl-terraform
 variable "data_volumes" {
   type = list(object({
