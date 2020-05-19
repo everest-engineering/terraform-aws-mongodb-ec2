@@ -32,7 +32,7 @@ rename it to **terraform-provisioner-ansible** and place it in **~/.terraform.d/
 
 ### 2. Install Ansible role undergreen.mongodb
 
-`> ansible-galaxy install undergreen.mongodb --ignore-errors --ignore-certs`
+`> ansible-galaxy install undergreen.mongodb`
 
 ### 3. SSH Keys
 User needs to provide SSH keys for this module to perform remote provisioning.
@@ -143,7 +143,7 @@ For more details see Example 2 - [mongodb-in-private-subnet](examples/mongodb-in
 | ami_owners        | AMI owners filter criteria                | 	list(string) | `["self", "amazon", "aws-marketplace"]` | 	no
 | mongodb_version   | MongoDB version to install                | 	string | "4.2" | 	no
 | replicaset_name   | MongoDB replicaset name                   | 	string | "" | 	no
-| replica_count     | Number of Replica nodes                   | 	number | 0  | 	no
+| replica_count     | Number of Replica nodes excluding primary node | 	number | 0  | 	no
 | tags              | Tag for EC2                               |   map(string) | {} | no
 
 ### Outputs

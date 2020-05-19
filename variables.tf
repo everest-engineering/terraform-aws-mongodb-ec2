@@ -28,7 +28,7 @@ variable "ami_filter_name" {
 
 variable "data_volumes" {
   type = list(object({
-    ebs_volume_id = string
+    ebs_volume_id     = string
     availability_zone = string
   }))
   description = "List of EBS volumes"

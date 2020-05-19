@@ -22,6 +22,28 @@ terraform apply
 3. Provision MongoDB:
 Configure the existing/created `ebs_volume_id`(s) and a`vailability_zone`(s) as `data_volumes` variable in `mongodb-in-private-subnet/main.tf`.
 
+```hcl-terraform
+variable "data_volumes" {
+  type = list(object({
+    ebs_volume_id     = string
+    availability_zone = string
+  }))
+  description = "List of EBS volumes"
+  default     = [
+    {
+      ebs_volume_id = "EBS_VOLUME_ID_HERE"
+      availability_zone = "AZ_HERE"
+    },
+    {
+      ebs_volume_id = "EBS_VOLUME_ID_HERE"
+      availability_zone = "AZ_HERE"
+    }
+  ]
+}
+```
+
+Now you can provision MongoDB as follows:
+
 ```shell script
 cd terraform-mongodb-provisioning-ec2/examples/mongodb-in-private-subnet
 terraform init
