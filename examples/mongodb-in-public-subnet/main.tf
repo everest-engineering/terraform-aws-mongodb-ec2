@@ -23,9 +23,10 @@ module "mongodb" {
   data_volumes    = var.data_volumes
   mongodb_version = "4.2"
   replicaset_name = "mongo-rp0"
-  replica_count   = 1
+  replica_count   = var.replica_count
   private_key     = file("~/.ssh/id_rsa")
   public_key      = file("~/.ssh/id_rsa.pub")
+  keypair_name    = var.keypair_name
   tags = {
     Name        = "MongoDB Server"
     Environment = "terraform-mongo-testing"
@@ -37,17 +38,24 @@ variable "region" {
   description = "AWS Region"
 }
 
+variable "keypair_name" {
+  type        = string
+  description = "Keypair name"
+  default     = "mongo-publicKey"
+}
+
+variable "replica_count" {
+  type        = number
+  description = "Number of Replica nodes"
+  default     = 1
+}
+
 variable "data_volumes" {
   type = list(object({
     ebs_volume_id     = string
     availability_zone = string
   }))
   description = "List of EBS volumes"
-}
-
-variable "availability_zone" {
-  type    = string
-  description = "Availability zone"
 }
 
 output "mongo_server_ip_address" {

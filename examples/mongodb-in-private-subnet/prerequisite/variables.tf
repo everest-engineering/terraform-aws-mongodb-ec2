@@ -36,7 +36,7 @@ variable "volume_size" {
 variable "volume_count" {
   type        = number
   description = "Number of volumes to create"
-  default     = 2
+  default     = 1
 }
 
 variable "environment_tag" {
