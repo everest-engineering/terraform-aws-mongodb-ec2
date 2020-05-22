@@ -17,7 +17,7 @@ resource "aws_ebs_volume" "mongo-data-vol" {
 variable "volume_count" {
   type        = number
   description = "Number of volumes to create"
-  default     = 2
+  default     = 1
 }
 
 variable "availability_zone" {

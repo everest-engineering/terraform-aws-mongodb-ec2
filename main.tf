@@ -1,8 +1,9 @@
 locals {
   ami_id             = var.ami_id == "" ? data.aws_ami.ami.id : var.ami_id
-  public_key_name    = "mongo-publicKey"
+  public_key_name    = var.keypair_name
   device_name        = "/dev/xvdh"
   ansible_host_group = ["db-mongodb"]
+  replica_count      = var.replica_count < 1 ? 1 : var.replica_count
 }
 
 data "aws_vpc" "selected_vpc" {
@@ -15,14 +16,15 @@ resource "aws_key_pair" "mongo_keypair" {
 }
 
 resource "aws_instance" "mongo_server" {
-  count                  = var.replica_count + 1
-  ami                    = local.ami_id
-  instance_type          = var.instance_type
-  subnet_id              = var.subnet_id
-  vpc_security_group_ids = [aws_security_group.sg_mongodb.id]
-  key_name               = aws_key_pair.mongo_keypair.key_name
-  availability_zone      = var.data_volumes[count.index].availability_zone
-  tags                   = var.tags
+  count                       = local.replica_count
+  ami                         = local.ami_id
+  instance_type               = var.instance_type
+  subnet_id                   = var.subnet_id
+  vpc_security_group_ids      = [aws_security_group.sg_mongodb.id]
+  key_name                    = aws_key_pair.mongo_keypair.key_name
+  availability_zone           = var.data_volumes[count.index].availability_zone
+  associate_public_ip_address = true
+  tags                        = var.tags
 
   connection {
     host         = var.bastion_host == "" ? self.public_ip : self.private_ip
@@ -48,7 +50,7 @@ resource "aws_instance" "mongo_server" {
 }
 
 resource "aws_volume_attachment" "mongo-data-vol-attachment" {
-  count       = var.replica_count + 1
+  count       = local.replica_count
   device_name = local.device_name
   volume_id   = var.data_volumes[count.index].ebs_volume_id
   instance_id = aws_instance.mongo_server[count.index].id
@@ -92,12 +94,11 @@ resource "aws_volume_attachment" "mongo-data-vol-attachment" {
 
 resource "null_resource" "replicaset_initialization" {
   depends_on = [aws_volume_attachment.mongo-data-vol-attachment]
-  count      = var.replica_count
 
   provisioner "file" {
     content = templatefile("${path.module}/provisioning/init-replicaset.js.tmpl", {
       replicaSetName = var.replicaset_name
-      ip_addrs       = aws_instance.mongo_server.*.private_ip
+      ip_addrs       = aws_instance.mongo_server.*.public_ip
     })
     destination = "/tmp/init-replicaset.js"
   }

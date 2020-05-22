@@ -139,9 +139,10 @@ For more details see Example 2 - [mongodb-in-private-subnet](examples/mongodb-in
 | ami	            | ID of AMI to use for the instance         | 	string | ""	 | no
 | ami_filter_name   | AMI selection filter by name. This will be ignored if `ami` value is specified | 	string | "ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*" | 	no
 | ami_owners        | AMI owners filter criteria                | 	list(string) | `["self", "amazon", "aws-marketplace"]` | 	no
+| keypair_name      | Keypair name                              | 	string | "mongo-publicKey" | 	no
 | mongodb_version   | MongoDB version to install                | 	string | "4.2" | 	no
 | replicaset_name   | MongoDB replicaset name                   | 	string | "" | 	no
-| replica_count     | Number of Replica nodes excluding primary node | 	number | 0  | 	no
+| replica_count     | Number of Replica nodes                   | 	number | 1  | 	no
 | tags              | Tag for EC2                               |   map(string) | {} | no
 
 ### Outputs

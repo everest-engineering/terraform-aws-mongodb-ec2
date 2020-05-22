@@ -46,14 +46,20 @@ variable "tags" {
   default     = {}
 }
 
+variable "keypair_name" {
+  type        = string
+  description = "Keypair name"
+  default     = "mongo-publicKey"
+}
+
 variable "public_key" {
   type        = string
-  description = "Public keypair name"
+  description = "Public key file path"
 }
 
 variable "private_key" {
   type        = string
-  description = "Private key"
+  description = "Private key file path"
 }
 
 variable "bastion_host" {
@@ -82,5 +88,5 @@ variable "replicaset_name" {
 variable "replica_count" {
   type        = number
   description = "Number of Replica nodes"
-  default     = 0
+  default     = 1
 }

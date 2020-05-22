@@ -1,5 +1,4 @@
 resource "aws_security_group" "sg_mongodb" {
-  name   = "sg_mongodb"
   vpc_id = data.aws_vpc.selected_vpc.id
   ingress {
     from_port   = 22

@@ -1,6 +1,5 @@
 # To specify/override the input variable values
 region = ""
-availability_zone = ""
 data_volumes = [
   {
     ebs_volume_id     = ""
