@@ -61,3 +61,9 @@ variable "data_volumes" {
 output "mongo_server_ip_address" {
   value = module.mongodb.mongo_server_public_ip
 }
+
+
+output "mongo_replica_ip_address" {
+  description = "MongoDB replicaset IP addresses"
+  value = module.mongodb.mongo_replica_public_ip
+}
