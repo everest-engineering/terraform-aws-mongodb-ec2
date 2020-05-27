@@ -1,7 +1,7 @@
 # Terraform MongoDB provisioner using AWS EC2
 
 > This module is part of a project to simplify the provisioning of MongoDB on AWS cloud using Terraform. 
-You may also wish to consider [one of the other approaches](https://github.com/everest-engineering/terraform-mongodb-provisioning).
+You may also wish to consider [one of the other approaches](https://github.com/everest-engineering/terraform-aws-mongodb).
 
 This module provision MongoDB server on AWS EC2 instance using Ansible provisioner.
 
@@ -165,9 +165,9 @@ For more details see Example 2 - [mongodb-in-private-subnet](examples/mongodb-in
 ## Contributing
 We appreciate your help!
  
-[Open an issue](https://github.com/everest-engineering/terraform-mongodb-provisioning-ec2/issues/new/choose) or submit a pull request for an enhancement. 
+[Open an issue](https://github.com/everest-engineering/terraform-aws-mongodb-ec2/issues/new/choose) or submit a pull request for an enhancement. 
 Browse through the 
-[current open issues](https://github.com/everest-engineering/terraform-mongodb-provisioning-ec2/issues).
+[current open issues](https://github.com/everest-engineering/terraform-aws-mongodb-ec2/issues).
 
 ## License
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)

@@ -1,4 +1,4 @@
-module github.com/everest-engineering/terraform-mongodb-provisioning/mongo-provisioner-ec2
+module github.com/everest-engineering/terraform-aws-mongodb/mongo-provisioner-ec2
 
 go 1.14
 
