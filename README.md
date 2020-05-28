@@ -5,7 +5,7 @@ You may also wish to consider [one of the other approaches](https://github.com/e
 
 This module provision MongoDB server on AWS EC2 instance using Ansible provisioner.
 
-![Terraform MongoDB Provider using AWS EC2](images/Mongo-EC2.png)
+![Terraform MongoDB Provider using AWS EC2](https://github.com/everest-engineering/terraform-aws-mongodb-ec2/blob/master/images/Mongo-EC2.png?raw=true)
 
 This module uses [undergreen.mongodb](https://galaxy.ansible.com/undergreen/mongodb) Ansible role to provision mongodb.
 So, you can use any of the [platforms supported by **undergreen.mongodb**](https://github.com/UnderGreen/ansible-role-mongodb/blob/master/README.md) role while selecting the AMI ID.
@@ -173,6 +173,6 @@ Browse through the
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ## Authors
-[![EverestEngineering](images/banner.png)](https://everest.engineering)
+[![EverestEngineering](https://github.com/everest-engineering/terraform-aws-mongodb-ec2/blob/master/images/banner.png?raw=true)](https://everest.engineering)
 
 [![License: EverestEngineering](https://img.shields.io/badge/Copyright%20%C2%A9-EVERESTENGINEERING-blue)](https://everest.engineering)
