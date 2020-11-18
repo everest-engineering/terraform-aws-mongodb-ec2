@@ -98,7 +98,8 @@ resource "null_resource" "replicaset_initialization" {
   provisioner "file" {
     content = templatefile("${path.module}/provisioning/init-replicaset.js.tmpl", {
       replicaSetName = var.replicaset_name
-      ip_addrs       = aws_instance.mongo_server.*.public_ip
+      ip_addrs       = var.bastion_host == "" ? aws_instance.mongo_server.*.public_ip : aws_instance.mongo_server.*.private_ip
+
     })
     destination = "/tmp/init-replicaset.js"
   }
