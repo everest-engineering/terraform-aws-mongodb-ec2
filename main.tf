@@ -23,7 +23,7 @@ resource "aws_instance" "mongo_server" {
   vpc_security_group_ids      = [aws_security_group.sg_mongodb.id]
   key_name                    = aws_key_pair.mongo_keypair.key_name
   availability_zone           = var.data_volumes[count.index].availability_zone
-  associate_public_ip_address = true
+  associate_public_ip_address = var.bastion_host == "" ? true : false
   tags                        = var.tags
 
   connection {
