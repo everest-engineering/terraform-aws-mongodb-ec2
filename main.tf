@@ -32,6 +32,7 @@ resource "aws_instance" "mongo_server" {
     user         = var.ssh_user
     private_key  = var.private_key
     bastion_host = var.bastion_host
+    bastion_user = var.bastion_user == "" ? var.ssh_user : var.bastion_user
     agent        = true
   }
 
@@ -63,6 +64,7 @@ resource "aws_volume_attachment" "mongo-data-vol-attachment" {
     user         = var.ssh_user
     private_key  = var.private_key
     bastion_host = var.bastion_host
+    bastion_user = var.bastion_user == "" ? var.ssh_user : var.bastion_user
     agent        = true
   }
 
@@ -115,6 +117,7 @@ resource "null_resource" "replicaset_initialization" {
     user         = var.ssh_user
     private_key  = var.private_key
     bastion_host = var.bastion_host
+    bastion_user = var.bastion_user == "" ? var.ssh_user : var.bastion_user
     agent        = true
   }
 }
