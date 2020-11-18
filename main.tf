@@ -23,7 +23,7 @@ resource "aws_instance" "mongo_server" {
   vpc_security_group_ids      = [aws_security_group.sg_mongodb.id]
   key_name                    = aws_key_pair.mongo_keypair.key_name
   availability_zone           = var.data_volumes[count.index].availability_zone
-  associate_public_ip_address = true
+  associate_public_ip_address = var.bastion_host == "" ? true : false
   tags                        = var.tags
 
   connection {
@@ -32,6 +32,7 @@ resource "aws_instance" "mongo_server" {
     user         = var.ssh_user
     private_key  = var.private_key
     bastion_host = var.bastion_host
+    bastion_user = var.bastion_user == "" ? var.ssh_user : var.bastion_user
     agent        = true
   }
 
@@ -63,6 +64,7 @@ resource "aws_volume_attachment" "mongo-data-vol-attachment" {
     user         = var.ssh_user
     private_key  = var.private_key
     bastion_host = var.bastion_host
+    bastion_user = var.bastion_user == "" ? var.ssh_user : var.bastion_user
     agent        = true
   }
 
@@ -99,7 +101,6 @@ resource "null_resource" "replicaset_initialization" {
     content = templatefile("${path.module}/provisioning/init-replicaset.js.tmpl", {
       replicaSetName = var.replicaset_name
       ip_addrs       = var.bastion_host == "" ? aws_instance.mongo_server.*.public_ip : aws_instance.mongo_server.*.private_ip
-
     })
     destination = "/tmp/init-replicaset.js"
   }
@@ -116,6 +117,7 @@ resource "null_resource" "replicaset_initialization" {
     user         = var.ssh_user
     private_key  = var.private_key
     bastion_host = var.bastion_host
+    bastion_user = var.bastion_user == "" ? var.ssh_user : var.bastion_user
     agent        = true
   }
 }
