@@ -79,6 +79,12 @@ variable "ssh_user" {
   description = "SSH user name"
 }
 
+variable "bastion_user" {
+  type        = string
+  description = "bastion SSH user name"
+  default     = ""
+}
+
 variable "replicaset_name" {
   type        = string
   description = "MongoDB ReplicaSet Name"

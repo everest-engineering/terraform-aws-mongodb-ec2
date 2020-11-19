@@ -18,6 +18,7 @@ module "mongodb" {
   private_key     = file("~/.ssh/id_rsa")
   public_key      = file("~/.ssh/id_rsa.pub")
   bastion_host    = var.bastion_host
+  bastion_user    = "ubuntu"
   tags = {
     Name        = "MongoDB Server"
     Environment = "terraform-mongo-testing"
