@@ -86,8 +86,16 @@ resource "aws_volume_attachment" "mongo-data-vol-attachment" {
         file_path = "${path.module}/provisioning/playbook.yaml"
       }
       extra_vars = {
-        mongodb_version             = var.mongodb_version
-        mongodb_replication_replset = var.replicaset_name
+        mongodb_version                = var.mongodb_version
+        mongodb_replication_replset    = var.replicaset_name
+        mongodb_keyfile_content        = file(var.keyfile)
+        mongodb_security_authorization = var.security_authorization
+        mongodb_user_admin_name        = var.admin_user_name
+        mongodb_user_admin_password    = var.admin_user_password
+        mongodb_root_admin_name        = var.root_user_name
+        mongodb_root_admin_password    = var.root_user_password
+        mongodb_root_backup_name       = var.backup_user_name
+        mongodb_root_backup_password   = var.backup_user_password
       }
       groups = local.ansible_host_group
     }
