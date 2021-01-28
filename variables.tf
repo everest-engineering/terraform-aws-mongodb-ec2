@@ -79,6 +79,12 @@ variable "ssh_user" {
   description = "SSH user name"
 }
 
+variable "bastion_user" {
+  type        = string
+  description = "bastion SSH user name"
+  default     = ""
+}
+
 variable "replicaset_name" {
   type        = string
   description = "MongoDB ReplicaSet Name"
@@ -89,4 +95,44 @@ variable "replica_count" {
   type        = number
   description = "Number of Replica nodes"
   default     = 1
+}
+variable "security_authorization" {
+  type        = string
+  description = "Authorization"
+  default     = "disabled"
+}
+variable "admin_user_name" {
+  type        = string
+  description = "Admin user name"
+  default     = "admin"
+}
+variable "admin_user_password" {
+  type        = string
+  description = "Admin user password"
+  default     = "passw0rd"
+}
+variable "root_user_name" {
+  type        = string
+  description = "Root user name"
+  default     = "root"
+}
+variable "root_user_password" {
+  type        = string
+  description = "Root user password"
+  default     = "passw0rd"
+}
+variable "backup_user_name" {
+  type        = string
+  description = "Backup user name"
+  default     = "root"
+}
+variable "backup_user_password" {
+  type        = string
+  description = "Backup user password"
+  default     = "passw0rd"
+}
+variable "keyfile" {
+  type        = string
+  description = "keyfile path"
+  default     = "./keyfile"
 }
